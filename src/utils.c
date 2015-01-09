@@ -81,3 +81,11 @@ void stringify_hex(char * hexstr, char * str)
     }
     strcpy(str, tmpbuffer1);
 }
+
+int require_admin_token()
+{
+    char * cookie;
+
+    cookie=getenv("HTTP_COOKIE");
+    printf("Users cookie is cookie\n", cookie);
+}
