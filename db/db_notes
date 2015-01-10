@@ -1,0 +1,9 @@
+Database entries are files.
+
+Files for users are named user_username. Format:
+
+	from: <name> <amount> <balance>
+	to: <name> <amount> <balance>
+
+Each line is a transaction entry. The balance at the end of the last entry
+is the current balance of the account.
