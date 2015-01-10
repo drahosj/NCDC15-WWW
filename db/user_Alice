@@ -1,1 +1,3 @@
 from: initial 0 0
+from: deposit 100 100
+to: bob 10 90

@@ -31,6 +31,9 @@ void main()
 
     if (strstr(user_password, "&") != NULL)
         strstr(user_password, "&")[0] = 0;
+    
+    if(require_admin_token())
+        return forbidden();
 
     sprintf(touch_str, "echo -n %s > ../../db/pass_%s", user_password, user_name);
     system(touch_str);
@@ -41,5 +44,6 @@ void main()
 
     sprintf(touch_str, "echo from: initial 0 0 > ../../db/user_%s", user_name);
     system(touch_str);
+
     printf("New user %s created!\n", user_name);
 }

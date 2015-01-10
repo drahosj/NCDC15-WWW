@@ -82,10 +82,50 @@ void stringify_hex(char * hexstr, char * str)
     strcpy(str, tmpbuffer1);
 }
 
+void forbidden()
+{
+    printf("Status: 403\n");
+    headers();
+    printf("Forbidden!");
+}
+
 int require_admin_token()
 {
-    char * cookie;
+    char buffer[512];
 
-    cookie=getenv("HTTP_COOKIE");
-    printf("Users cookie is cookie\n", cookie);
+    hexify_string("ADMINISTRATOR", buffer);
+
+    return strcmp(buffer, post_value(getenv("HTTP_COOKIE"), "access_token"));
+}
+
+int require_user_token(char * user)
+{
+    if (require_admin_token() == 0)
+        return require_admin_token();
+
+    char buffer[512];
+    hexify_string(user, buffer);
+    return strcmp(buffer, post_value(getenv("HTTP_COOKIE"), "access_token"));
+}
+
+int get_balance(char * user)
+{
+    FILE * f;
+    char buffer[512];
+    char * current;
+    int last_balance = 0;;
+
+    sprintf(buffer, "../../db/user_%s", user);
+    f = fopen(buffer, "r");
+    while(!feof(f))
+    {
+        fgets(buffer, 512, f);
+        current = buffer;
+
+        current = strstr(current, " ");
+        current = strstr(current, " ");
+        current = strstr(current, " ");
+
+        sscanf(current, "%d", &last_balance);
+    }
 }

@@ -9,4 +9,5 @@ char * post_value(char * str, char * key);
 int file_exists(char * filename);
 int require_user_token(char * user);
 int require_admin_token();
+void forbidden();
 #endif
