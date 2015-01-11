@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 void headers()
 {
@@ -112,20 +113,56 @@ int get_balance(char * user)
 {
     FILE * f;
     char buffer[512];
-    char * current;
     int last_balance = 0;;
+    char * index;
 
     sprintf(buffer, "../../db/user_%s", user);
     f = fopen(buffer, "r");
     while(!feof(f))
     {
+        memset(buffer, 0, 512);
         fgets(buffer, 512, f);
-        current = buffer;
-
-        current = strstr(current, " ");
-        current = strstr(current, " ");
-        current = strstr(current, " ");
-
-        sscanf(current, "%d", &last_balance);
+        index = rindex(buffer, ' ');
+        if (index == NULL)
+            break;
+        sscanf(index, " %d", &last_balance);
     }
+    return last_balance;
+}
+
+void get_parameter(char * key, char * buffer)
+{
+    char internal_buffer[128];
+    char * line = NULL;
+    size_t length = 0;
+    char * method;
+
+    line = buffer;
+
+    method = getenv("REQUEST_METHOD");
+    if(strcmp(method, "POST") == 0)
+    {
+        getline(&line, &length, stdin);
+    }
+    else
+    {
+        line = getenv("QUERY_STRING");
+    }
+    strcpy(buffer, post_value(line, key));
+    if (strstr(buffer, "&") != NULL)
+        strstr(buffer, "&")[0] = 0;
+
+    if (strstr(buffer, "\n") != NULL)
+        strstr(buffer, "\n")[0] = 0;
+}
+
+int check_user(char * user_name)
+{
+    FILE * f;
+    char buffer[64];
+    sprintf(buffer, "../../db/user_%s", user_name);
+    if (fopen(buffer, "r"))
+        return 1;
+    else
+        return 0;
 }

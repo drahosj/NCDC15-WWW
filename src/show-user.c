@@ -3,7 +3,7 @@
 
 void main()
 {
-    char buffer[200];
+    char buffer[1024];
     sprintf(buffer, "../../db/user_%s", query_value("user_name"));
     if (file_exists(buffer))
     {
@@ -17,9 +17,9 @@ void main()
         system(buffer);
         printf("</p>");
         printf("<h3>Transaction History</h3>");
-        printf("<table><tr><th>To or From</th><th>Other Party</th><th>Amount</th><th>Balance</th></tr>\n");
+        printf("<table><tr><th>Transaction</th><th>Debit</th><th>Credit</th><th>Balance</th></tr>\n");
         fflush(stdout);
-        sprintf(buffer, "cat ../../db/user_%s | sed -e 's/\\(.*\\): \\(.*\\) \\(.*\\) \\(.*\\)/<tr><td>\\1<\\/td><td>\\2<\\/td><td>\\3<\\/td><td>\\4<\\/td><\\/tr>/'", query_value("user_name"));
+        sprintf(buffer, "cat ../../db/user_%s | sed -e 's/from: \\(.*\\) \\(.*\\) \\(.*\\)/<tr><td>\\1<\\/td><td>---<\\/td><td>\\2<\\/td><td>\\3<\\/td><\\/tr>/' -e 's/to: \\(.*\\) \\(.*\\) \\(.*\\)/<tr><td>\\1<\\/td><td>\\2<\\/td><td>---<\\/td><td>\\3<\\/td><\\/tr>/'", query_value("user_name"));
 	system(buffer);
         printf("</table></body></html>");
     }
