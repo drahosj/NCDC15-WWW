@@ -11,6 +11,9 @@ void main()
     size_t line_len = 0;
     char name[64];
 
+    if(require_admin_token())
+        return forbidden();
+
     if (strcmp("POST", getenv("REQUEST_METHOD")) == 0)
     {
         getline(&line, &line_len, stdin);

@@ -46,7 +46,7 @@ void main()
         if (strncmp(attempt_password, password_from_db, strlen(attempt_password)) == 0)
         {
             hexify_string(user_name, tokenbuffer);
-            printf("Set-cookie: access_token=%s\n", tokenbuffer);
+            printf("Set-cookie: access_token=%s; Path=/;\n", tokenbuffer);
             headers();
 
             printf("Set access token to %s\n", tokenbuffer);

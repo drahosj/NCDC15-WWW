@@ -96,6 +96,9 @@ int require_admin_token()
 
     hexify_string("ADMINISTRATOR", buffer);
 
+    if (getenv("HTTP_COOKIE") == NULL || post_value(getenv("HTTP_COOKIE"), "access_token") == NULL)
+        return 1;
+
     return strcmp(buffer, post_value(getenv("HTTP_COOKIE"), "access_token"));
 }
 
@@ -103,6 +106,9 @@ int require_user_token(char * user)
 {
     if (require_admin_token() == 0)
         return require_admin_token();
+
+    if (getenv("HTTP_COOKIE") == NULL || post_value(getenv("HTTP_COOKIE"), "access_token") == NULL)
+        return 1;
 
     char buffer[512];
     hexify_string(user, buffer);

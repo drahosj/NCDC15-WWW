@@ -5,6 +5,10 @@ void main()
 {
     char buffer[1024];
     sprintf(buffer, "../../db/user_%s", query_value("user_name"));
+
+    if (require_user_token(query_value("user_name")))
+            return forbidden();
+
     if (file_exists(buffer))
     {
         headers_html();
