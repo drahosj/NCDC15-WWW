@@ -8,8 +8,8 @@ void main()
     size_t length = 0;
     char * method;
     char * line = NULL;
-    char user_name[35];
-    char user_password[35];
+    char user_name[128];
+    char user_password[128];
     char redirect_buffer[256];
     char touch_str[256];
 
