@@ -11,14 +11,16 @@ void main()
     int amount = 0;
     int new_amount = 0;
 
-    strcpy(access_token, post_value(getenv("HTTP_COOKIE"), "access_token"));
-    stringify_hex(access_token, user_name);
+    if(require_admin_token())
+        return forbidden();
+
+    get_parameter("user_name", user_name);
 
     if (check_user(user_name) == 0)
     {
         printf("Status: 404\n");
         headers();
-        printf("User not into existing!\n");    
+        printf("User %s does not exist!\n", user_name);    
         return ;
     }
 

@@ -16,7 +16,7 @@ void main()
     strcpy(access_token, post_value(getenv("HTTP_COOKIE"), "access_token"));
     stringify_hex(access_token, user_name);
 
-    if(strcmp(user_name, "ADMININSTRATOR") == 0)
+    if(strcmp(user_name, "ADMINISTRATOR") == 0)
     {
         get_parameter("user_name", user_name);
     }
@@ -25,7 +25,7 @@ void main()
     {
         printf("Status: 404\n");
         headers();
-        printf("User not into existing!\n");    
+        printf("User %s not found!\n", user_name);    
         return;
     }
     get_parameter("other_party", other_party);
@@ -33,7 +33,7 @@ void main()
     {
         printf("Status: 404\n");
         headers();
-        printf("Other party not into existing!\n");
+        printf("Other party %s not found!\n", other_party);
         return;
     }
 
