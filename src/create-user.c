@@ -10,8 +10,8 @@ void main()
     char * line = NULL;
     char user_name[35];
     char user_password[35];
-    char redirect_buffer[50];
-    char touch_str[128];
+    char redirect_buffer[256];
+    char touch_str[256];
 
     method = getenv("REQUEST_METHOD");
     
