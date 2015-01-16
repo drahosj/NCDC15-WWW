@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>CDC Investment Bank and Trust</title>
+    </head>
+    <script> 
+    function doBlink() { 
+      // Blink, Blink, Blink... 
+      var blink =  document.getElementsByTagName("blink");
+        for (var i=0; i < blink.length; i++) 
+          blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "" 
+    } 
+
+    function startBlink() { 
+
+    setInterval("doBlink()",1000);
+    }
+    window.onload = startBlink; 
+    </script> 
+
+  <body bgcolor=grey>
+    <center>
+      <h1> 
+        Welcome &&USER_NAME&&! Use the links below to navigate.
+        </h1>
+      
+      <a href="/cgi-bin/show/show-user?user_name=&&USER_NAME&&">
+        <h3>View Account</h3>
+        </a>
+
+      <h3>
+        <img src="/new.gif">
+        Automatic Online Transfers
+        <img src="/new.gif">
+        </h3>
+
+      <p>Enter recepient name and amount below to sumbit a transfer</p>
+      <p>
+        <form action="/cgi-bin/actions/make-payment" method=GET>
+          Recipient: <input type=text name=other_party>
+          Amount: $<input type=text name=amount size=4>
+          <input type=submit>
+          </form>
+        </p>
+      
+      <a href="/cgi-bin/actions/logout">Log out</a>
+      <p>
+        Contact our Washington, DC <a href="/branches.html">branch</a>
+        for web support. Tel: 1-866-672-4473
+        </p>
+      </center>
+
+    <hr/>
+    <iframe width=100% scrolling=no frameborder=none src="/bottom.html"/>
+    </body>
+  </html>

@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>CDC Investment Bank and Trust</title>
+    </head>
+    <script> 
+    function doBlink() { 
+      // Blink, Blink, Blink... 
+      var blink =  document.getElementsByTagName("blink");
+        for (var i=0; i < blink.length; i++) 
+          blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "" 
+    } 
+
+    function startBlink() { 
+
+    setInterval("doBlink()",1000);
+    }
+    window.onload = startBlink; 
+    </script> 
+
+  <body bgcolor=grey>
+    <center>
+      <h2>Washington, DC Branch</h2>
+      <p>
+        Tel: 1-866-672-4473 <br/>
+        Addr: 1600 Pennsylvania
+        Avenue Northwest, Washington, DC 20500
+        </p>
+
+      <h2><img src=new2.gif> Ames, IA Branch</h2>
+      <p>
+        Tel: 1-555-733-8326 <br/>
+        Addr: 1212 Coover Hall, Ames, IA 50010
+        </p>
+
+      </center>
+
+    <iframe width=100% scrolling=no frameborder=none src="/bottom.html"/>
+
+    </body>
+  </html>

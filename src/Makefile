@@ -1,6 +1,6 @@
 LIBOBJECTS=utils.o
-BINOBJECTS=create-user.o show-user.o delete-user.o get-access-token.o get-admin-access-token.o make-deposit.o make-withdrawal.o make-payment.o find-user.o
-BINARIES=create-user show-user delete-user get-access-token get-admin-access-token make-deposit make-withdrawal make-payment find-user
+BINOBJECTS=create-user.o show-user.o delete-user.o get-access-token.o get-admin-access-token.o make-deposit.o make-withdrawal.o make-payment.o find-user.o landing.o logout.o
+BINARIES=create-user show-user delete-user get-access-token get-admin-access-token make-deposit make-withdrawal make-payment find-user landing logout
 
 CFLAGS=-g
 
@@ -15,7 +15,9 @@ install: all
 	install find-user ../cgi-bin/actions/
 	install get-access-token ../cgi-bin/actions/
 	install get-admin-access-token ../cgi-bin/actions/
+	install logout ../cgi-bin/actions/
 	install show-user ../cgi-bin/show/
+	install landing ../cgi-bin/show/
 
 uninstall:
 	rm -f ../cgi-bin/actions/create-user
@@ -26,10 +28,15 @@ uninstall:
 	rm -f ../cgi-bin/actions/find-user
 	rm -f ../cgi-bin/actions/get-access-token
 	rm -f ../cgi-bin/actions/get-admin-access-token
+	rm -f ../cgi-bin/actions/logout
 	rm -f ../cgi-bin/show/show-user
+	rm -f ../cgi-bin/show/langing
 
 create-user: $(LIBOBJECTS) create-user.o
 	gcc -o create-user $(LIBOBJECTS) create-user.o
+
+logout: $(LIBOBJECTS) logout.o
+	gcc -o logout $(LIBOBJECTS) logout.o
 
 make-payment: $(LIBOBJECTS) make-payment.o
 	gcc -o make-payment $(LIBOBJECTS) make-payment.o
@@ -54,6 +61,9 @@ get-access-token: $(LIBOBJECTS) get-access-token.o
 
 get-admin-access-token: $(LIBOBJECTS) get-admin-access-token.o
 	gcc -o get-admin-access-token $(LIBOBJECTS) get-admin-access-token.o
+
+landing: $(LIBOBJECTS) landing.o
+	gcc -o landing $(LIBOBJECTS) landing.o
 
 clean:
 	rm $(LIBOBJECTS) $(BINOBJECTS) $(BINARIES) -f

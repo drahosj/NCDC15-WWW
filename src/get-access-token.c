@@ -47,9 +47,10 @@ void main()
         {
             hexify_string(user_name, tokenbuffer);
             printf("Set-cookie: access_token=%s; Path=/;\n", tokenbuffer);
+            redirect("/cgi-bin/show/landing");
             headers();
 
-            printf("Set access token to %s\n", tokenbuffer);
+            printf("access_token=%s\n", tokenbuffer);
         }
         else
         {
