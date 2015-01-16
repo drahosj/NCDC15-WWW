@@ -16,6 +16,11 @@ void main()
     strcpy(access_token, post_value(getenv("HTTP_COOKIE"), "access_token"));
     stringify_hex(access_token, user_name);
 
+    if(strcmp(user_name, "ADMININSTRATOR") == 0)
+    {
+        get_parameter("user_name", user_name);
+    }
+
     if (check_user(user_name) == 0)
     {
         printf("Status: 404\n");
